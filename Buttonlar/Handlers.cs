@@ -146,6 +146,36 @@ namespace bot
                     messageId: callbackQuery.Message.MessageId);
                     break;
 
+                case "1-33":
+                    await client.SendTextMessageAsync(
+                        chatId: callbackQuery.From.Id,
+                        text: "Kerakli tugmani bosing va go'zal isimning ma'nosini bilib oling.",
+                        replyMarkup: MessageBuilder.Al_Asma());
+                    await client.DeleteMessageAsync(
+                    chatId: callbackQuery.From.Id,
+                    messageId: callbackQuery.Message.MessageId);
+                    break;
+                case "33-66":
+                    await client.SendTextMessageAsync(
+                        chatId: callbackQuery.From.Id,
+                        text: "Kerakli tugmani bosing va go'zal isimning ma'nosini bilib oling.",
+                        replyMarkup: MessageBuilder.Asma2());
+                    await client.DeleteMessageAsync(
+                    chatId: callbackQuery.From.Id,
+                    messageId: callbackQuery.Message.MessageId);
+                    break;
+                case "66-99":
+                    await client.SendTextMessageAsync(
+                        chatId: callbackQuery.From.Id,
+                        text: "Kerakli tugmani bosing va go'zal isimning ma'nosini bilib oling.",
+                        replyMarkup: MessageBuilder.Asma3());
+                    await client.DeleteMessageAsync(
+                    chatId: callbackQuery.From.Id,
+                    messageId: callbackQuery.Message.MessageId);
+                    break;
+
+
+
             }
         }
 
@@ -195,7 +225,7 @@ namespace bot
                       chatId: message.Chat.Id,
                       parseMode: ParseMode.Markdown,
                       text: "Siz bu yerda Allohning go'zal ismlarini va Ularning manosini yodlab olishingiz mumkun..😍😍",
-                      replyMarkup:MessageBuilder.Al_Asma()
+                      replyMarkup:MessageBuilder.Asosiy()
                       );
                  
                     await client.DeleteMessageAsync(

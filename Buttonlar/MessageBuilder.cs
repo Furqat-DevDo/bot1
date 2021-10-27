@@ -150,17 +150,15 @@ namespace bot
                  ResizeKeyboard = true,
                  OneTimeKeyboard = true
              };
-        public static InlineKeyboardMarkup Al_Asma()
-        {
-            var keyboard = new InlineKeyboardMarkup
-            (
-                new InlineKeyboardButton[][]
-                {
-                   
+        public static InlineKeyboardMarkup Al_Asma() {
+
+            InlineKeyboardButton[][] button1 = new InlineKeyboardButton[][]
+            {
+
                     new InlineKeyboardButton[] {
-                        
+
                         InlineKeyboardButton.WithCallbackData("Alloh", "1"),
-                       
+
                         InlineKeyboardButton.WithCallbackData("Ar-Rohman", "2"),
 
                         InlineKeyboardButton.WithCallbackData("Ar-Rohim", "3"),
@@ -245,7 +243,44 @@ namespace bot
 
                         InlineKeyboardButton.WithCallbackData("Al-Halim", "33"),
                     },
-                                      new InlineKeyboardButton[] {
+         };
+
+
+
+            InlineKeyboardMarkup javob = new InlineKeyboardMarkup(button1);
+
+            return javob;
+
+        }
+
+        public static InlineKeyboardMarkup Asosiy()
+        {
+            InlineKeyboardButton Button11 = new InlineKeyboardButton();
+            InlineKeyboardButton Button12 = new InlineKeyboardButton();
+            InlineKeyboardButton Button21= new InlineKeyboardButton();
+
+            Button11.Text = "1-33";
+            Button11.CallbackData = "1-33";
+
+            Button12.Text = "33-66";
+            Button12.CallbackData = "33-66";
+
+            Button21.Text = "66-99";
+            Button21.CallbackData = "66-99";
+
+            InlineKeyboardButton[] buttons = new InlineKeyboardButton[] { Button11, Button12 ,Button21};
+
+            InlineKeyboardMarkup inline3 = new InlineKeyboardMarkup(buttons);
+
+            return inline3;
+        }
+
+        public static InlineKeyboardMarkup Asma2(){
+
+            InlineKeyboardButton[][] button2 = new InlineKeyboardButton[][]
+                 {
+
+                     new InlineKeyboardButton[] {
 
                         InlineKeyboardButton.WithCallbackData("Al-Azim", "34"),
 
@@ -256,7 +291,7 @@ namespace bot
                                         new InlineKeyboardButton[] {
 
                         InlineKeyboardButton.WithCallbackData("Al-Aliyy", "37"),
-                        
+
                         InlineKeyboardButton.WithCallbackData("Al-Kabir", "38"),
 
                         InlineKeyboardButton.WithCallbackData("Al-Hafiz", "39"),
@@ -334,7 +369,19 @@ namespace bot
 
                         InlineKeyboardButton.WithCallbackData("Al-Majid", "66"),
                     },
-                           new InlineKeyboardButton[] {
+           }; 
+            
+            InlineKeyboardMarkup javob2 = new InlineKeyboardMarkup(button2);
+
+          return javob2;
+        }
+        public static InlineKeyboardMarkup Asma3()
+        {
+
+            InlineKeyboardButton[][] button3 = new InlineKeyboardButton[][]
+                 {
+
+                     new InlineKeyboardButton[] {
 
                         InlineKeyboardButton.WithCallbackData("Al-Vahid", "67"),
 
@@ -422,9 +469,13 @@ namespace bot
 
                         InlineKeyboardButton.WithCallbackData("A-Sobur", "99"),
                     },
-                }
-            );return keyboard;
+           };
+
+            InlineKeyboardMarkup javob3 = new InlineKeyboardMarkup(button3);
+
+            return javob3;
         }
+
         internal static IReplyMarkup webapi2()
         {
             throw new NotImplementedException();
