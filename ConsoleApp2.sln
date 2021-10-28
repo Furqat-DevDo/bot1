@@ -5,9 +5,12 @@ VisualStudioVersion = 17.0.31815.197
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp2", "ConsoleApp2.csproj", "{B4CFB307-E976-4947-ABB9-C123F072E3DA}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{17D82524-CC4B-42DE-9F6C-1C576846A816}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Http zaproslar.", "Http zaproslar.", "{151CCCF6-DAC2-4AF9-9B93-E5062F8A5865}"
 	ProjectSection(SolutionItems) = preProject
-		Metodlar.cs = Metodlar.cs
+		Al-Adhan.cs = Al-Adhan.cs
+		Services\appsettings.json = Services\appsettings.json
+		IprayerTime Client.cs = IprayerTime Client.cs
+		..\..\bootcamp-1\bot\HttpClients\PrayerTimeClient.cs = ..\..\bootcamp-1\bot\HttpClients\PrayerTimeClient.cs
 	EndProjectSection
 EndProject
 Global

@@ -16,11 +16,16 @@ namespace bot
     {
         private readonly ILogger<Handlers> _logger;
         private readonly IStorageService _storage;
+        private readonly ICacheService _cache;
 
-        public Handlers(ILogger<Handlers> logger, IStorageService storage)
+        public Handlers(
+            ILogger<Handlers> logger,
+            IStorageService storage,
+            ICacheService cache)
         {
             _logger = logger;
             _storage = storage;
+            _cache = cache;
         }
 
         public Task HandleErrorAsync(ITelegramBotClient client, Exception exception, CancellationToken ctoken)
@@ -173,7 +178,15 @@ namespace bot
                     chatId: callbackQuery.From.Id,
                     messageId: callbackQuery.Message.MessageId);
                     break;
-
+                case "back":
+                    await client.SendTextMessageAsync(
+                        chatId: callbackQuery.From.Id,
+                        text: "Kerakli tugmani bosing va go'zal isimning ma'nosini bilib oling.",
+                        replyMarkup: MessageBuilder.Asosiy());
+                    await client.DeleteMessageAsync(
+                    chatId: callbackQuery.From.Id,
+                    messageId: callbackQuery.Message.MessageId);
+                    break;
 
 
             }
@@ -181,10 +194,54 @@ namespace bot
 
         private async Task BotOnMessageReceived(ITelegramBotClient client, Message message)
         {
+            if ( message.Location != null)
+            {
+                var lon = message.Location.Longitude;
+                var lat = message.Location.Latitude;
+                Math.Round(lon, 6);
+                Math.Round(lat, 6);
+                var user = new BotUser(
+                    chatId: message.Chat.Id,
+                    username: message.From.Username,
+                fullname: $"{message.From.FirstName} {message.From.LastName}",
+                longitude:lon,
+                latitude:lat,
+                address: "");
+                 var res1=  await _storage.InsertUserAsync(user);
+
+                if (res1.IsSuccess)
+                {
+                    _logger.LogInformation($"New user added: {message.Chat.Id}");
+                    await _storage.InsertUserAsync(user);
+                }
+                else
+                {
+                    await _storage.UpdateUserAsync(user);
+                    _logger.LogInformation($"User already exists!");
+                }
+                Console.WriteLine(lon + " " + lat);
+
+                var res = await _storage.GetUserAsync(message.Chat.Id);
+                var result = await _cache.GetOrUpdatePrayerTimeAsync(res.ChatId, res.Longitude, res.Latitude);
+                var times = result.prayerTime;
+                await client.SendTextMessageAsync(
+                    chatId: message.Chat.Id,
+                    text: @$"
+             *Fajr*: {times.Fajr}
+             *Sunrise*: {times.Sunrise}
+             *Dhuhr*: {times.Dhuhr}
+             *Asr*: {times.Asr}
+             *Maghrib*: {times.Maghrib}
+             *Isha*: {times.Isha}
+             *Midnight*: {times.Midnight}
+                    
+             *Method*: {times.CalculationMethod}
+                    ",
+                    parseMode: ParseMode.Markdown);
+            }
             switch (message.Text)
             {
                 case "/start":
-                   
                  
                     await client.SendTextMessageAsync(
                         chatId: message.Chat.Id,
@@ -197,11 +254,11 @@ namespace bot
                         messageId: message.MessageId);
                     break;
 
-                case "Lokatsiya Jo'natish 📍 ":
+                case "Namoz Vaqtlari 📍 .":
                     await client.SendTextMessageAsync(
                        chatId: message.Chat.Id,
                        parseMode: ParseMode.Markdown,
-                       text: "Iltimos kerakli Menyuni tanlang✅",
+                       text: "Iltimos Lokatsiyangizni jo'nating yoki \n yoki kerakli menyuni tanlang.✅",
                        replyMarkup: MessageBuilder.webapi());
                     await client.DeleteMessageAsync(
                         chatId: message.Chat.Id,
@@ -265,11 +322,11 @@ namespace bot
                     break;
 
 
-                case "Отправлять локацию 📍 ":
+                case "Время молитв.📍 ":
                     await client.SendTextMessageAsync(
                        chatId: message.Chat.Id,
                        parseMode: ParseMode.Markdown,
-                       text: "Пожалуйста выберите нужный вам меню.✅",
+                       text: "Пожалуйста отправьте свойу локацию или выберите нужный вам меню.✅",
                        replyMarkup: MessageBuilder.webapiru());
                     await client.DeleteMessageAsync(
                         chatId: message.Chat.Id,

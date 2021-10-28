@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -23,18 +23,18 @@ namespace bot.Services
 
         public Task<bool> ExistsAsync(string username)
             => Task.FromResult<bool>(_users.Any(u => u.Username == username));
-
+       
 
         public Task<BotUser> GetUserAsync(long chatId)
             => Task.FromResult<BotUser>(_users.FirstOrDefault(u => u.ChatId == chatId));
-
+        
 
         public Task<BotUser> GetUserAsync(string username)
             => Task.FromResult<BotUser>(_users.FirstOrDefault(u => u.Username == username));
 
         public async Task<(bool IsSuccess, Exception exception)> InsertUserAsync(BotUser user)
         {
-            if (await ExistsAsync(user.ChatId))
+            if(await ExistsAsync(user.ChatId))
             {
                 return (false, new Exception("User already exists!"));
             }
@@ -45,7 +45,7 @@ namespace bot.Services
 
         public async Task<(bool IsSuccess, Exception exception, BotUser user)> RemoveAsync(BotUser user)
         {
-            if (await ExistsAsync(user.ChatId))
+            if(await ExistsAsync(user.ChatId))
             {
                 var savedUser = await GetUserAsync(user.ChatId);
                 _users.Remove(savedUser);
@@ -57,7 +57,7 @@ namespace bot.Services
 
         public async Task<(bool IsSuccess, Exception exception)> UpdateUserAsync(BotUser user)
         {
-            if (await ExistsAsync(user.ChatId))
+            if(await ExistsAsync(user.ChatId))
             {
                 var savedUser = await GetUserAsync(user.ChatId);
                 _users.Remove(savedUser);

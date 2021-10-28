@@ -72,7 +72,7 @@ namespace bot
                             {
                                 new List<KeyboardButton>()
                                 {
-                                   new KeyboardButton(){ Text = "Lokatsiya Jo'natish 📍 ", RequestLocation = true },
+                                   new KeyboardButton(){ Text = "Namoz Vaqtlari 📍 .", RequestLocation = true },
                                    new KeyboardButton(){ Text = "Shaharlar nomi bilan\n namoz vaqtlarini qidirish 🔎" }
 
                                 },
@@ -88,7 +88,7 @@ namespace bot
 
                                 }
                             },
-             ResizeKeyboard = true,
+             ResizeKeyboard =true,
              OneTimeKeyboard = true
          };
         public static ReplyKeyboardMarkup location2()
@@ -131,7 +131,7 @@ namespace bot
                             {
                                 new List<KeyboardButton>()
                                 {
-                                   new KeyboardButton(){ Text = "Отправлять локацию 📍 ", RequestLocation = true },
+                                   new KeyboardButton(){ Text = "Время молитв.📍 ", RequestLocation = true },
                                    new KeyboardButton(){ Text = "Ищите время молитв\n по названию желаемого города.🔎" }
 
                                 },
@@ -243,9 +243,12 @@ namespace bot
 
                         InlineKeyboardButton.WithCallbackData("Al-Halim", "33"),
                     },
+                                     new InlineKeyboardButton[] {
+                        InlineKeyboardButton.WithCallbackData("Orqaga🔙", "back"),
+                    },
+
          };
-
-
+           
 
             InlineKeyboardMarkup javob = new InlineKeyboardMarkup(button1);
 
@@ -258,7 +261,7 @@ namespace bot
             InlineKeyboardButton Button11 = new InlineKeyboardButton();
             InlineKeyboardButton Button12 = new InlineKeyboardButton();
             InlineKeyboardButton Button21= new InlineKeyboardButton();
-
+            InlineKeyboardButton orqaga = new InlineKeyboardButton();
             Button11.Text = "1-33";
             Button11.CallbackData = "1-33";
 
@@ -267,7 +270,8 @@ namespace bot
 
             Button21.Text = "66-99";
             Button21.CallbackData = "66-99";
-
+            orqaga.Text = "Orqaga🔙";
+            orqaga.CallbackData = "back";
             InlineKeyboardButton[] buttons = new InlineKeyboardButton[] { Button11, Button12 ,Button21};
 
             InlineKeyboardMarkup inline3 = new InlineKeyboardMarkup(buttons);
@@ -369,6 +373,9 @@ namespace bot
 
                         InlineKeyboardButton.WithCallbackData("Al-Majid", "66"),
                     },
+                           new InlineKeyboardButton[] {
+                        InlineKeyboardButton.WithCallbackData("Orqaga🔙", "back"),
+                    },
            }; 
             
             InlineKeyboardMarkup javob2 = new InlineKeyboardMarkup(button2);
@@ -468,6 +475,9 @@ namespace bot
                         InlineKeyboardButton.WithCallbackData("Ar-Roshid", "98"),
 
                         InlineKeyboardButton.WithCallbackData("A-Sobur", "99"),
+                    },
+                                    new InlineKeyboardButton[] {
+                        InlineKeyboardButton.WithCallbackData("Orqaga🔙", "back"),
                     },
            };
 
